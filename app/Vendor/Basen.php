@@ -6,7 +6,7 @@
  * @author dozen
  */
 class Basen {
-    
+
     static private $char, $base;
 
     /**
@@ -14,7 +14,7 @@ class Basen {
      * @param string $file
      */
     function setCharFile($file = 'char') {
-        self::$char = rtrim(file_get_contents($file));
+        self::$char = file_get_contents(__DIR__ . '/' . $file);
         $charset = mb_detect_encoding(self::$char);
         self::$base = mb_strlen(self::$char, $charset);
         mb_internal_encoding($charset);
@@ -35,7 +35,7 @@ class Basen {
         while ($place >= 0) {
             $pow = pow($base, $place);
             $currentplace = floor($value / $pow); //現在の桁の数
-            $result .= mb_substr(self::$char, $currentplace, 1); //文字に変換
+            $result .= mb_substr(self::$char, $currentplace - 1, 1); //文字に変換
             $value -= $currentplace * $pow; //現在の桁の分だけ引き算
             $place--;
         }
@@ -57,7 +57,7 @@ class Basen {
         $place = mb_strlen($value) - 1; //桁数を求める
         while ($place >= $currentplace) {
             $pow = pow($base, $place - $currentplace);
-            $currentplacechar = mb_substr($value, $currentplace, 1); //現在の桁の文字を抽出
+            $currentplacechar = mb_substr($value, $currentplace - 1, 1); //現在の桁の文字を抽出
             $result += mb_strpos(self::$char, $currentplacechar) * $pow;
             $currentplace++;
         }
