@@ -10,7 +10,9 @@ App::import('Vendor', 'Basen');
 class Url extends AppModel {
 
     public $name = 'Url';
-    var $validate = array('url' => 'url');
+    var $validate = array('url' => array(
+        'rule' => 'url', 
+        'message' => '有効なURLを入力してください'));
 
     /**
      * URLの登録
@@ -26,6 +28,7 @@ class Url extends AppModel {
             $data = array('char' => $basen, 'url' => $url); //登録するデータ
             $result = $this->save($data);
             if($result === false) {
+                var_dump($result);
                 //登録に失敗した時。
             } 
             $char = $basen;

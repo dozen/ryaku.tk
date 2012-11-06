@@ -13,7 +13,6 @@
 class UrlsController extends AppController {
 
     public $helpers = array('Html', 'Form');
-    public $components = array('RequestHandler');
 
     public function index() {
         $this->set('title_for_layout', '略.tk -URL短縮サービス-');

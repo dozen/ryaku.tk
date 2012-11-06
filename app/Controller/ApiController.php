@@ -12,31 +12,31 @@
  */
 class ApiController extends AppController {
 
-    public $uses = array('Url', 'Xml');
     public $components = array('RequestHandler');
+    public $uses = array('Url', 'Xml');
 
     public function index() {
         $result = $this->Url->register($this->request->query['url']);
         $data = array('url' => 'http://' . $result . '.略.tk', 'subdomain' => $result);
         switch ($this->request->params['ext']) {
             case 'json':
-                echo '<pre>';
                 $this->RequestHandler->setContent('json');
-                $this->RequestHandler->respondAs('application/json; charset=UTF-8');
-                return new CakeResponse(array('body' => json_encode($data)));
+                $this->RequestHandler->respondAs('application/json');
+                $this->set('body', json_encode($data));
                 break;
             case 'xml':
                 $this->RequestHandler->setContent('xml');
-                $this->RequestHandler->respondAs('application/xml; charset=UTF-8');
-                $value = '<?xml version="1.0" encoding="UTF-8"?>' .
-                        '<response>' .
+                $this->RequestHandler->respondAs('application/xml');
+                $body = '<response>' .
                         '<url>' . $data['url'] . '</url>' .
-                        '<subdomain>' . $data['subdomain'] . '</dubdomain>' .
+                        '<subdomain>' . $data['subdomain'] . '</subdomain>' .
                         '</response>';
-                return new CakeResponse(array('body' => $value));
+                $this->set('body', $body);
                 break;
             default:
-                return new CakeResponse(array('body' => $data['url']));
+                $this->RequestHandler->setContent('txt');
+                $this->RequestHandler->respondAs('text/plain');
+                $this->set('body', $data['url']);
                 break;
         }
     }
