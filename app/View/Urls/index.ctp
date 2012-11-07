@@ -1,5 +1,4 @@
-<?php
-?>
+<div>略.tkはサブドメイン・日本語ドメインに対応した数少ないURL短縮サービスです。</div>
 <!-- File: /app/View/Posts/add.ctp -->
 <?php echo $urlCount ?>個のURLが短縮されました。
 <?php $this->Html->scriptStart(array('inline' => false))?>

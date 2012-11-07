@@ -1,0 +1,49 @@
+/* 
+    Document   : style.css
+    Created on : 2012/11/07, 23:29:09
+    Author     : dozen
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#container {
+    background-color: rgba(255,255,255,0.9);
+    padding: 10px 50px;
+    margin: 20px auto;
+    max-width: 800px;
+    height: 2000px;
+    border-style: groove;
+    border-width: 1px;
+    border-color: #000;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-topright: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -moz-border-radius-bottomleft: 8px;
+}
+
+.back {
+    position:fixed;
+    z-index: -10;
+    white-space: nowrap;
+}
+
+h1, h2 {
+    text-align: center;
+    margin: 5px;
+}
+
+h1 {
+    font-size: 80px;
+}
+
+h2 {
+    font-size: 30px;
+}

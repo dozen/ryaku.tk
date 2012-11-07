@@ -6,13 +6,9 @@
  * @author dozen
  */
 App::import('Vendor', 'Basen');
+App::import('Vendor', 'Validate');
 
 class Url extends AppModel {
-
-    public $name = 'Url';
-    var $validate = array('url' => array(
-        'rule' => 'url', 
-        'message' => '有効なURLを入力してください'));
 
     /**
      * URLの登録
@@ -21,16 +17,19 @@ class Url extends AppModel {
      */
     function register($url) {
         $data = $this->find('first', array('conditions' => array('url' => $url)));
+        if (Validate::isURL($url) === false) {
+            return false;
+        }
         if ($data === false) {    //登録されてなかったら登録作業をする。
             $count = $this->find('count');
             Basen::setCharFile();
-            $basen = Basen::encode(++$count);
+            $basen = Basen::encode($count);
             $data = array('char' => $basen, 'url' => $url); //登録するデータ
             $result = $this->save($data);
-            if($result === false) {
-                var_dump($result);
-                //登録に失敗した時。
-            } 
+            if ($result === false) {
+                //DBへの登録が失敗した時
+                return false;
+            }
             $char = $basen;
         } else { //もうデータがあったらそれを返す。
             $char = Hash::get($data, 'Url.char');

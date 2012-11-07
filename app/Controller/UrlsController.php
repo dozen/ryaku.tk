@@ -1,10 +1,5 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
+App::import('Vendor', 'Validate');
 /**
  * Description of UrlsController
  *
@@ -25,5 +20,3 @@ class UrlsController extends AppController {
     }
 
 }
-
-?>
