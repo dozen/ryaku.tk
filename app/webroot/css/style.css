@@ -15,10 +15,9 @@ root {
     padding: 10px 50px;
     margin: 20px auto;
     max-width: 800px;
-    height: 2000px;
     border-style: groove;
     border-width: 1px;
-    border-color: #000;
+    border-color: rgba(0,0,0,0.3);
     -webkit-border-top-left-radius: 8px;
     -webkit-border-top-right-radius: 8px;
     -webkit-border-bottom-right-radius: 8px;
@@ -29,15 +28,36 @@ root {
     -moz-border-radius-bottomleft: 8px;
 }
 
+#container div {
+    margin: 50px 0px 0px;
+}
+
+.url {
+    width: 300px;
+}
+
+#header {
+    text-align: center;
+}
+
+#form {
+    text-align: center;
+}
+
+#form .parts {
+    font-size: 20px;
+    margin: 10px 10px;
+}
+
 .back {
+    color: #555;
     position:fixed;
     z-index: -10;
     white-space: nowrap;
 }
 
 h1, h2 {
-    text-align: center;
-    margin: 5px;
+    /*margin: 5px;*/
 }
 
 h1 {
@@ -46,4 +66,18 @@ h1 {
 
 h2 {
     font-size: 30px;
+}
+
+#footer {
+    text-align: right;
+    font-size: 12px;
+}
+
+a:link {
+    color: #000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #000;
 }

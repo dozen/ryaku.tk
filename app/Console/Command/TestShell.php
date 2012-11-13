@@ -28,7 +28,26 @@ class TestShell extends AppShell {
     }
 
     public function url() {
-        Validate::isUrl('http://yahoo.co.jp');
+        $url = 'http://google.com';
+        require_once('Net/IDNA2.php');
+        $idna = Net_IDNA2::getInstance();
+        $url = $idna->encode($url);
+        $ch = curl_init($url);
+        curl_setopt_array($ch, array(
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_NOBODY => true
+        ));
+        $hoge = curl_exec($ch);
+        var_dump($hoge);
+        $info = curl_getinfo($ch);
+        var_dump($info);
+        curl_close($ch);
+    }
+    
+    function isSafe() {
+        $url = 'http://beeg.com/';
+        var_dump(Validate::isSafe($url));
     }
 
     public function puny() {

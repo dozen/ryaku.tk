@@ -16,10 +16,11 @@ class Url extends AppModel {
      * @return string 変換後のURLの一部（サブドメイン部分）
      */
     function register($url) {
-        $data = $this->find('first', array('conditions' => array('url' => $url)));
-        if (Validate::isURL($url) === false) {
+        $url = Validate::isURL($url);
+        if ($url === false) {
             return false;
         }
+        $data = $this->find('first', array('conditions' => array('url' => $url)));
         if ($data === false) {    //登録されてなかったら登録作業をする。
             $count = $this->find('count');
             Basen::setCharFile();
@@ -45,10 +46,10 @@ class Url extends AppModel {
     function findUrl($url) {
         require_once('Net/IDNA2.php');
         $idna = Net_IDNA2::getInstance();
-        preg_match('/^([-0-7a-zA-Z]*)\./', $url, $match);
-        $puny_code = $match[1];
-        $basen = $idna->decode($puny_code);
-        $result = $this->find('first', array('conditions' => array('char' => $basen)));
+        $urlArr = explode('.', $url);
+        $puny_code = $urlArr[0];
+        $subdomain = $idna->decode($puny_code);
+        $result = $this->find('first', array('conditions' => array('char' => $subdomain)));
         if ($result === false) {
             //DBに結果がなかった時になにかする
         }
